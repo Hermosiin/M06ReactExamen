@@ -6,7 +6,7 @@ import './Header.css'
 
 
 export default function Header() {
-  let {usuari, setUsuari, idUser, setIdUser}=useContext(UserContext)
+  let {usuari, setUsuari,idUser, setIdUser, nameUser, setNameUser} = useContext(UserContext);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function Header() {
         <div className='botones'>
           <Link to="/todos" >Todos </Link>
         </div>
-        <p className='roles-name'> USER: {usuari} {idUser}
+        <p className='roles-name'> NOM: {nameUser} CORREU: {usuari} ID: {idUser}
         </p>
         <button className='boton-logout'
           onClick={(e) => {

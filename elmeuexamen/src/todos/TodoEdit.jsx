@@ -30,6 +30,7 @@ export default function TodoEdit () {
         })
         const resposta = await data.json();
           console.log(resposta)
+          resposta.completed=resposta.completed ? 1 : 0;
 
           setFormulari({
             userId: resposta.userId,
@@ -52,9 +53,6 @@ export default function TodoEdit () {
 
       let {userId,title,completed}=formulari;
       console.log(formulari);
-      var formData = new FormData();
-      formData.append("title", title);
-      formData.append("completed", completed);
 
       try {
         const data = await fetch("http://localhost:3004/todos/" + id, {
@@ -64,7 +62,7 @@ export default function TodoEdit () {
           method: "PUT",
           body: JSON.stringify({userId:new Number(userId), 
                                 title: new String(title), 
-                                completed:new Boolean(completed)})
+                                completed:parseInt(completed)? true:false})
         })
         const resposta = await data.json();
         console.log(resposta);
@@ -86,11 +84,15 @@ export default function TodoEdit () {
     <div>
       <h1>EDIT TODOS</h1>
       <form>
+          <label>TITLE: </label>
           <input type="text" placeholder="Title" name="title" value = { formulari.title } onChange={handleChange}/>
+          <br></br>
+          <label>COMPLETED: </label>
           <select name="completed" onChange={handleChange} value={formulari.completed}>
-            <option value="false">False</option>
-            <option value="true">True</option>
+            <option value="0">False</option>
+            <option value="1">True</option>
           </select>
+          <br></br>
           <button onClick={(e) => {editTodo(e);}}>Edit Todo</button>
       </form>
     </div>

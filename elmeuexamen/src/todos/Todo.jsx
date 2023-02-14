@@ -66,11 +66,11 @@ export default function Todo () {
   return (
 
     <div>
-      <p>User Id: {todo.userId}</p>
-      <p>Id: {todo.id}</p>
-      <p>Title: {todo.title}</p>
+      <p>ID USER: {todo.userId}</p>
+      <p>ID TODO: {todo.id}</p>
+      <p>TITLE: {todo.title}</p>
 
-      <p> Completed: {todo.completed ?<span> Si</span> : <span>No</span> }</p>
+      <p> COMPLETED: {todo.completed ?<span className='hecho'> Si</span> : <span className='nohecho'>No</span> }</p>
 
       {(idUser == todo.userId ) &&  
       <p><Link to={"/todos/edit/" +todo.id}><i className="bi bi-pencil-fill"></i></Link></p>}

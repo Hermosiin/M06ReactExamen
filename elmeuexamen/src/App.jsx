@@ -18,10 +18,11 @@ import TodoEdit from "./todos/TodoEdit";
 export default function App() {
   let [usuari, setUsuari] = useState("");
   let [idUser, setIdUser] = useState("");
+  let [nameUser, setNameUser] = useState("");
 
   return (
     <>
-      <UserContext.Provider value= { { usuari, setUsuari, idUser, setIdUser }}>
+      <UserContext.Provider value= { { usuari, setUsuari, idUser, setIdUser, nameUser, setNameUser }}>
         {usuari ? (
           <>
             <Header />

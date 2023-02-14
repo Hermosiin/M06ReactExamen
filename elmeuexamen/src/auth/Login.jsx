@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login({ setCanvi }) {
 
-  let {usuari, setUsuari,idUser, setIdUser} = useContext(UserContext);
+  let {usuari, setUsuari,idUser, setIdUser, nameUser, setNameUser} = useContext(UserContext);
   let [correu, setCorreu] = useState("");
   let [password, setPassword] = useState("");
+  let [error, setError] = useState("");
 
   const sendLogin = async (e) => {
     e.preventDefault();
@@ -22,12 +23,15 @@ export default function Login({ setCanvi }) {
       const resposta = await data.json();
       if (password == resposta[0].password){
         setUsuari(resposta[0].email);
-        setIdUser(resposta[0].id)
+        setIdUser(resposta[0].id);
+        setNameUser(resposta[0].name);
       }else{
-        alert("Contraseña erronea");
+        // alert("Contraseña o correo erronea")
+        setError("Contraseña erronea");
       }
     } catch {
       console.log("Error");
+      setError("Correo erronea");
       //alert("catch");
     }
   };
@@ -59,6 +63,7 @@ export default function Login({ setCanvi }) {
                   }} 
                 />
             </div>
+            { error ? (<div className="error"> {error}</div>) : (<></>)} 
             <div className="form__field">
                 <input onClick={(e) => {sendLogin(e);}} className="submit" type="submit" value="Iniciar Sesión"></input>
             </div>

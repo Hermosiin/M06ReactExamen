@@ -4,7 +4,7 @@ import { UserContext } from "../userContext";
 
 export default function Register({ setCanvi }) {
   
-let {usuari, setUsuari} = useContext(UserContext);
+  let {usuari, setUsuari,idUser, setIdUser} = useContext(UserContext);
   let [formulario, setFormulari] = useState({});
 
   const handleChange = (e) => {
@@ -35,6 +35,7 @@ let {usuari, setUsuari} = useContext(UserContext);
       const resposta = await data.json();
         alert(resposta.email);
         setUsuari(resposta.email);
+        setIdUser(resposta.id)
     } catch {
       console.log("Error");
       //alert("catch");

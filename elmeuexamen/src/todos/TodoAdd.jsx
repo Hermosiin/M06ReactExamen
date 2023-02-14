@@ -6,6 +6,7 @@ export default function TodoAdd() {
   let [formulari, setFormulari] = useState({});
   let {usuari, setUsuari, idUser, setIdUser}=useContext(UserContext);
   let navigate = useNavigate();
+  let [error, setError] = useState("");
   
 
   const handleChange = (e) => {
@@ -32,22 +33,36 @@ export default function TodoAdd() {
       const resposta = await data.json();
       console.log(resposta);
       navigate("/todos")
+
+      // me falta poner el error de min 4 caracteres
+
+      // setError("Minimo 4 caracteres para el title ")
+
         
     }catch{
       console.log("Error");
       // alert("catch");
+    
+
     }
   }
 
   return <div>
             <h1>ADD TODOS</h1>
             <form>
-                <input type="text" placeholder="Title" name="title" onChange={handleChange}/>
+                <label>TITLE: </label>
+                <input type="text" minlength="4" placeholder="Title" name="title" onChange={handleChange}/>
+                <br></br>
+                <label>COMPLETED: </label>
                 <select name="completed" onChange={handleChange} value={formulari.completed}>
                   <option value="false">False</option>
                   <option value="true">True</option>
                 </select>
+                <br></br>
+                <div>{ error ? (<div className="error"> {error}</div>) : (<></>)}</div>
                 <button onClick={(e) => {sendTodo(e);}}>Crear Todo</button>
+                <button type="reset">Reset formulari</button>
             </form>
+            
           </div>;
   }
